@@ -11,7 +11,7 @@ public class Calendar {
     private JTextField textField;
     private JComboBox jComboBox;
 
-    public Calendar(){
+    public Calendar() {
 
     }
 
@@ -24,7 +24,7 @@ public class Calendar {
     }
 
     public void createJFrame() {
-        jFrame.setSize(800, 600);
+        jFrame.setSize(1000, 700);
         jFrame.setLayout(null);
         jFrame.setVisible(true);
     }
@@ -41,17 +41,21 @@ public class Calendar {
         jFrame.add(jButton);
     }
 
-    public Vector<String> createVector() {
+    /*public Vector<String> createVector() {
         Vector<String> module = new Vector<>();
         module.addElement("Week");
-        module.addElement("Daily");
+        module.addElement("Month");
         return module;
-    }
+    }*/
 
-    public void createComboBox(Vector<String> vector) {
-        JComboBox<String> comboModule = new JComboBox<String>(vector);
+    public JComboBox<String> createComboBox() {
+        Vector<String> module = new Vector<>();
+        module.addElement("Week");
+        module.addElement("Month");
+        JComboBox<String> comboModule = new JComboBox<>(module);
         comboModule.setBounds(500, 50, 100, 70);
         jFrame.add(comboModule);
+        return comboModule;
     }
 
     /*public void createTextField(JTextField textField) {
@@ -62,91 +66,119 @@ public class Calendar {
     public JTextField createTextField(JTextField textField) {
         textField.setBounds(200, 50, 201, 70);
         jFrame.add(textField);
-        return  textField;
+        return textField;
     }
 
-    public void create7Fields(){
+    public void create7Buttons() {
         JTextField mainJTextField = createTextField(new JTextField());
         int space = 0;
-        for (int i = 0; i <= 6 ; i++) {
+        int addDays = -1;
+        for (int i = 0; i <= 6; i++) {
+            addDays++;
             space += 90;
-            JTextField jTextField = new JTextField();
-            jTextField.setBounds(space, 130, 90, 400);
-            jTextField.setBorder(BorderFactory.createLineBorder(Color.black));
-            actionToMainTextField(mainJTextField,jTextField);
-            jFrame.add(jTextField);
+            JButton jButton = new JButton();
+            jButton.setBounds(space, 130, 90, 400);
+            jButton.setBorder(BorderFactory.createLineBorder(Color.black));
+            actionToMainTextField(mainJTextField, jButton, addDays);
+            changeMainTextField(mainJTextField, jButton);
+            jFrame.add(jButton);
         }
     }
 
+//    public void actionLeftButton(JButton jButtonLeft,JTextField mainJTextField){
+//        jButtonLeft.addActionListener(e->{
+//            LocalDate date = LocalDate.parse(mainJTextField.getText());
+//            LocalDate dateMinusOne = date.minusDays(1);
+//            mainJTextField.setText(date.toString());
+//        });
+//    }
 
 
-    public void actionToMainTextField(JTextField mainJTextField,JTextField jTextField){
+    public void actionToMainTextField(JTextField mainJTextField, JButton jButton, int addDays) {
 
 
         mainJTextField.addActionListener(e -> {
-            if(mainJTextField.getText().isEmpty()){
+            if (mainJTextField.getText().isEmpty()) {
                 LocalDate currentDate = LocalDate.now();
                 mainJTextField.setText(currentDate.toString());
-                jTextField.setText(currentDate.toString());
-            }else{
+                LocalDate localDate = currentDate.plusDays(addDays);
+                jButton.setText(localDate.toString());
+//                changeButtonColor(mainJTextField,jButton);
+            } else {
                 String input = mainJTextField.getText();
                 LocalDate localDate = LocalDate.parse(input);
-                jTextField.setText(localDate.toString());
+                LocalDate localDate1 = localDate.plusDays(addDays);
+                jButton.setText(localDate1.toString());
+//                changeButtonColor(mainJTextField,jButton);
+            }
+        });
+
+    }
+
+    public void actionToComboBox(JComboBox jComboBox) {
+        String yourChoice = (String) jComboBox.getSelectedItem();
+        jComboBox.addActionListener(e -> {
+
+            assert yourChoice != null;
+            if (yourChoice.equals("Week")) {
+                create7Buttons();
+            } else if (yourChoice.equals("Month")) {
+                create35Buttons();
             }
         });
     }
 
-    public  void init(){
+    public void changeMainTextField(JTextField mainJTextField, JButton jButton) {
+        jButton.addActionListener(e -> {
 
-        Calendar calendar = new Calendar(new JFrame(), new JButton(),new JTextField(),new JComboBox());
+                    String input = jButton.getText();
+                    mainJTextField.setText(input);
+
+                }
+        );
+    }
+
+    /*public void changeButtonColor(JTextField mainJTextField, JButton jButton){
+        mainJTextField.addActionListener(e -> {
+
+                    String input = mainJTextField.getText();
+                    if(input.equals(jButton.getText())){
+                        jButton.setBackground(Color.LIGHT_GRAY);
+                    }
+                }
+        );
+    }*/
+
+    public void create35Buttons() {
+        JTextField mainJTextField = createTextField(new JTextField());
+        jFrame.add(mainJTextField);
+        int spaceFromTop = 50;
+        for (int i = 0; i <= 4; i++) {
+            spaceFromTop += 80;
+            int spaceNextTo = 0;
+            for (int j = 0; j <= 6; j++) {
+                spaceNextTo += 100;
+                JButton jButton = new JButton();
+                jButton.setBounds(spaceNextTo, spaceFromTop, 100, 70);
+                jButton.setBorder(BorderFactory.createLineBorder(Color.black));
+                jFrame.add(jButton);
+
+            }
+        }
+    }
+
+
+    public void init() {
+
+        Calendar calendar = new Calendar(new JFrame(), new JButton(), new JTextField(), new JComboBox());
 
         calendar.createJFrame();
         calendar.createLeftButton(new JButton());
         calendar.createRightButton(new JButton());
-        calendar.createComboBox(calendar.createVector());
-//        calendar.createTextField(new JTextField());
-        calendar.create7Fields();
+        calendar.createComboBox();
+        calendar.create7Buttons();
+//        actionToComboBox(calendar.createComboBox());
+//        calendar.create35Buttons();
     }
 
-    public JFrame getjFrame() {
-        return jFrame;
-    }
-
-    public void setjFrame(JFrame jFrame) {
-        this.jFrame = jFrame;
-    }
-
-    public JButton getjButton() {
-        return jButton;
-    }
-
-    public void setjButton(JButton jButton) {
-        this.jButton = jButton;
-    }
-
-    public JTextField getTextField() {
-        return textField;
-    }
-
-    public void setTextField(JTextField textField) {
-        this.textField = textField;
-    }
-
-    public JComboBox getjComboBox() {
-        return jComboBox;
-    }
-
-    public void setjComboBox(JComboBox jComboBox) {
-        this.jComboBox = jComboBox;
-    }
-
-    @Override
-    public String toString() {
-        return "Calendar{" +
-                "jFrame=" + jFrame +
-                ", jButton=" + jButton +
-                ", textField=" + textField +
-                ", jComboBox=" + jComboBox +
-                '}';
-    }
 }
