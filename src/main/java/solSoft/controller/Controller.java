@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Controller {
 
-    List<DateChanged> dateChangedComponents = new ArrayList<>();
-    List<ViewChanged> viewChangedComponents = new ArrayList<>();
+    private List<DateChanged> dateChangedComponents = new ArrayList<>();
+    private List<ViewChanged> viewChangedComponents = new ArrayList<>();
 
 
 

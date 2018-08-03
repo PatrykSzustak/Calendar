@@ -15,6 +15,8 @@ public class ComboBox extends JComboBox implements ViewChanged {
         Controller.getInstance().getViewChangedComponents().add(this);
     }
 
+
+
     @Override
     public void onViewChanged(View view) {
 

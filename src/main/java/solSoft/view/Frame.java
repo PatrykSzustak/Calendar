@@ -22,7 +22,7 @@ public class Frame extends JFrame {
     }*/
 
     public Frame(TopPanel topPanel,BottomPanel bottomPanel) throws HeadlessException {
-        setSize(1000,800);
+        setSize(1000,700);
         this.topPanel = topPanel;
         this.bottomPanel=bottomPanel;
         add(topPanel);
@@ -32,11 +32,10 @@ public class Frame extends JFrame {
     }
 
     public Frame (TopPanel topPanel){
-        setSize(1000,600);
+        setSize(1000,700);
         this.topPanel = topPanel;
         add(topPanel);
         setLayout(null);
-        setVisible(true);
     }
 
     public TopPanel getTopPanel() {

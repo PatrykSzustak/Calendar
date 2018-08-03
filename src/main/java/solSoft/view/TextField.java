@@ -13,8 +13,15 @@ public class TextField extends JTextField implements DateChanged {
         Controller.getInstance().getDateChangedComponents().add(this);
     }
 
+
+
+
+
     @Override
     public void onDateChanged(Date date) {
+
+
+
 
     }
 }
