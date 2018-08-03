@@ -1,10 +1,19 @@
 package solSoft;
 
+
+import solSoft.view.*;
+
 public class Main {
     public static void main(String[] args) {
 
-        Calendar calendar = new Calendar();
-        calendar.init();
+
+        Frame frame = new Frame(new TopPanel(new LeftButton(),new RightButton(),new ComboBox(),new TextField()));
+
+        BottomPanel bottomPanel = new BottomPanel();
+        frame.add(bottomPanel);
+        bottomPanel.create7Fields();
+
 
     }
+
 }
