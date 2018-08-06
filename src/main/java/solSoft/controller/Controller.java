@@ -1,55 +1,42 @@
 package solSoft.controller;
 
-import solSoft.interfaces.DateChanged;
-import solSoft.interfaces.ViewChanged;
+import solSoft.view.BottomPanel;
+import solSoft.view.DateListener;
+import solSoft.view.ViewModeListener;
 
-import javax.swing.text.View;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class Controller {
+public class Controller implements DateListener,ViewModeListener {
 
-    private List<DateChanged> dateChangedComponents = new ArrayList<>();
-    private List<ViewChanged> viewChangedComponents = new ArrayList<>();
+    private BottomPanel bottomPanel;
+    private Date date = new Date();
+    private ViewMode viewMode = ViewMode.WEEK;
 
 
+    public Controller(BottomPanel bottomPanel) {
+        this.bottomPanel = bottomPanel;
+    }
 
-    private static Controller instance = null;
 
-    private Controller() {
+    @Override
+    public void onViewModeChange(ViewMode viewMode) {
+        updateState(viewMode,date);
+        this.viewMode = viewMode;
+    }
+
+    @Override
+    public void onDateChange(Date date) {
+        this.date = date;
+        updateState(viewMode,date);
 
     }
 
-    public static Controller getInstance() {
-        if (instance == null) {
-            instance = new Controller();
+    private void updateState(ViewMode viewMode, Date date) {
+        if (viewMode == ViewMode.WEEK) {
+            bottomPanel.create7Buttons(date);
+        } else if (viewMode == ViewMode.MONTH) {
+            bottomPanel.create35Buttons(date);
         }
-        return instance;
-    }
-
-    void dateEvent (Date date){
-
-    }
-
-    void viewEvent (View view){
-
-    }
-
-    public List<DateChanged> getDateChangedComponents() {
-        return dateChangedComponents;
-    }
-
-    public void setDateChangedComponents(List<DateChanged> dateChangedComponents) {
-        this.dateChangedComponents = dateChangedComponents;
-    }
-
-    public List<ViewChanged> getViewChangedComponents() {
-        return viewChangedComponents;
-    }
-
-    public void setViewChangedComponents(List<ViewChanged> viewChangedComponents) {
-        this.viewChangedComponents = viewChangedComponents;
     }
 
 }

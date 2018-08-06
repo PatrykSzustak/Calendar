@@ -1,18 +1,25 @@
 package solSoft;
 
 
-import solSoft.view.*;
+import solSoft.controller.Controller;
+import solSoft.view.BottomPanel;
+import solSoft.view.Frame;
+import solSoft.view.TopPanel;
+
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
 
 
-        Frame frame = new Frame(new TopPanel(new LeftButton(), new RightButton(), new ComboBox(), new TextField()));
-
         BottomPanel bottomPanel = new BottomPanel();
+        bottomPanel.create7Buttons(new Date());
+
+        Controller controller = new Controller(bottomPanel);
+
+
+        Frame frame = new Frame(new TopPanel(controller),bottomPanel);
         frame.add(bottomPanel);
-        bottomPanel.create7Fields();
-//        bottomPanel.create35Buttons();
         frame.setVisible(true);
 
     }

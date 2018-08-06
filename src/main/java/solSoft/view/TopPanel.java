@@ -1,27 +1,29 @@
 package solSoft.view;
 
+import solSoft.controller.ViewMode;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class TopPanel extends JPanel {
 
-    private LeftButton leftButton;
-    private RightButton rightButton;
-    private ComboBox comboBox;
-    private TextField textField;
-
-
-    public TopPanel(LeftButton leftButton, RightButton rightButton, ComboBox comboBox, TextField textField) {
+    public TopPanel(ViewModeListener viewModeListener) {
         setLayout(null);
-        setSize(1000,200);
+        setSize(1000,150);
         setBackground(Color.GRAY);
-        this.leftButton = leftButton;
-        this.rightButton = rightButton;
-        this.comboBox = comboBox;
-        this.textField = textField;
-        add(leftButton);
-        add(rightButton);
+        List<ViewMode> list = new ArrayList<>();
+        list.addAll(asList(ViewMode.values()));
+        ViewModeComboBox comboBox = new ViewModeComboBox(list);
+        comboBox.setListener(viewModeListener);
+        DatePicker datePicker = new DatePicker();
+
+
+
         add(comboBox);
-        add(textField);
+        add(datePicker);
     }
 }

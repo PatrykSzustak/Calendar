@@ -5,38 +5,26 @@ import java.awt.*;
 
 public class Frame extends JFrame {
 
-
     private TopPanel topPanel;
     private BottomPanel bottomPanel;
-//    private TextField textField;
-//    private LeftButton leftButton;
-//    private RightButton rightButton;
-//    private ComboBox comboBox;
 
-    /*public Frame(TopPanel topPanel, TextField textField, LeftButton leftButton, RightButton rightButton, ComboBox comboBox) throws HeadlessException {
-        setSize(800,600);
-        this.topPanel = topPanel;
-        add(topPanel);
-        setLayout(null);
-        setVisible(true);
-    }*/
 
-    public Frame(TopPanel topPanel,BottomPanel bottomPanel) throws HeadlessException {
-        setSize(1000,700);
+    public Frame(TopPanel topPanel, BottomPanel bottomPanel) throws HeadlessException {
+        setSize(1000, 700);
         this.topPanel = topPanel;
-        this.bottomPanel=bottomPanel;
+        this.bottomPanel = bottomPanel;
         add(topPanel);
         add(bottomPanel);
         setLayout(null);
         setVisible(true);
     }
 
-    public Frame (TopPanel topPanel){
-        setSize(1000,700);
+   /* public Frame(TopPanel topPanel) {
+        setSize(1000, 700);
         this.topPanel = topPanel;
         add(topPanel);
         setLayout(null);
-    }
+    }*/
 
     public TopPanel getTopPanel() {
         return topPanel;
