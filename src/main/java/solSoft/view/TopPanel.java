@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
 
 public class TopPanel extends JPanel {
 
-    public TopPanel(ViewModeListener viewModeListener) {
+    public TopPanel(ViewModeListener viewModeListener,DateListener dateListener) {
         setLayout(null);
         setSize(1000,150);
         setBackground(Color.GRAY);
@@ -20,7 +20,7 @@ public class TopPanel extends JPanel {
         ViewModeComboBox comboBox = new ViewModeComboBox(list);
         comboBox.setListener(viewModeListener);
         DatePicker datePicker = new DatePicker();
-
+        datePicker.setDateListener(dateListener);
 
 
         add(comboBox);

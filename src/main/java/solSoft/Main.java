@@ -18,7 +18,7 @@ public class Main {
         Controller controller = new Controller(bottomPanel);
 
 
-        Frame frame = new Frame(new TopPanel(controller),bottomPanel);
+        Frame frame = new Frame(new TopPanel(controller,controller),bottomPanel);
         frame.add(bottomPanel);
         frame.setVisible(true);
 
