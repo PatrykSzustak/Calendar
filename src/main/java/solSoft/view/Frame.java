@@ -18,22 +18,4 @@ public class Frame extends JFrame {
         setLayout(null);
         setVisible(true);
     }
-
-   
-
-    public TopPanel getTopPanel() {
-        return topPanel;
-    }
-
-    public void setTopPanel(TopPanel topPanel) {
-        this.topPanel = topPanel;
-    }
-
-    public BottomPanel getBottomPanel() {
-        return bottomPanel;
-    }
-
-    public void setBottomPanel(BottomPanel bottomPanel) {
-        this.bottomPanel = bottomPanel;
-    }
 }

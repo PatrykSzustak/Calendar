@@ -4,16 +4,16 @@ import solSoft.view.ChangeDate;
 import solSoft.view.ChangeView;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Controller {
 
 
     private static Controller instance = null;
 
-    private List<ChangeView> viewList = new ArrayList<>();
-    private List<ChangeDate> dateList = new ArrayList<>();
+    private List<ChangeView> viewList = new CopyOnWriteArrayList<>();
+    private List<ChangeDate> dateList = new CopyOnWriteArrayList<>();
 
     private Controller() {
 
