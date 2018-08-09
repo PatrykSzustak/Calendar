@@ -19,12 +19,7 @@ public class Frame extends JFrame {
         setVisible(true);
     }
 
-   /* public Frame(TopPanel topPanel) {
-        setSize(1000, 700);
-        this.topPanel = topPanel;
-        add(topPanel);
-        setLayout(null);
-    }*/
+   
 
     public TopPanel getTopPanel() {
         return topPanel;

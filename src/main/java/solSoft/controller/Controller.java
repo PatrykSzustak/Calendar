@@ -1,42 +1,45 @@
 package solSoft.controller;
 
-import solSoft.view.BottomPanel;
-import solSoft.view.DateListener;
-import solSoft.view.ViewModeListener;
+import solSoft.view.ChangeDate;
+import solSoft.view.ChangeView;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Controller implements DateListener,ViewModeListener {
-
-    private BottomPanel bottomPanel;
-    private Date date = new Date();
-    private ViewMode viewMode = ViewMode.WEEK;
+public class Controller {
 
 
-    public Controller(BottomPanel bottomPanel) {
-        this.bottomPanel = bottomPanel;
-    }
+    private static Controller instance = null;
 
+    private List<ChangeView> viewList = new ArrayList<>();
+    private List<ChangeDate> dateList = new ArrayList<>();
 
-    @Override
-    public void onViewModeChange(ViewMode viewMode) {
-        updateState(viewMode,date);
-        this.viewMode = viewMode;
-    }
-
-    @Override
-    public void onDateChange(Date date) {
-        this.date = date;
-        updateState(viewMode,date);
+    private Controller() {
 
     }
 
-    private void updateState(ViewMode viewMode, Date date) {
-        if (viewMode == ViewMode.WEEK) {
-            bottomPanel.create7Buttons(date);
-        } else if (viewMode == ViewMode.MONTH) {
-            bottomPanel.create35Buttons(date);
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
         }
+        return instance;
+    }
+
+    public void changeView(ViewMode viewMode) {
+        viewList.forEach(p->p.onViewChange(viewMode));
+    }
+
+    public void registerViewChange(ChangeView viewComponent) {
+        viewList.add(viewComponent);
+    }
+
+    public void changeDate(LocalDate date) {
+        dateList.forEach(p->p.onDateChange(date));
+    }
+
+    public void registerDateChange(ChangeDate dateComponent) {
+        dateList.add(dateComponent);
     }
 
 }
