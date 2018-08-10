@@ -1,9 +1,9 @@
 package solSoft;
 
 
-import solSoft.view.BottomPanel;
+import solSoft.view.planels.BottomPanel;
 import solSoft.view.Frame;
-import solSoft.view.TopPanel;
+import solSoft.view.planels.TopPanel;
 
 public class Main {
     public static void main(String[] args) {

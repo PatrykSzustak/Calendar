@@ -1,7 +1,7 @@
 package solSoft.controller;
 
-import solSoft.view.ChangeDate;
-import solSoft.view.ChangeView;
+import solSoft.view.interfaces.ChangeDate;
+import solSoft.view.interfaces.ChangeView;
 
 import java.time.LocalDate;
 import java.util.List;

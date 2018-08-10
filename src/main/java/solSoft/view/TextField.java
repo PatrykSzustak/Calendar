@@ -2,6 +2,7 @@ package solSoft.view;
 
 
 import solSoft.controller.Controller;
+import solSoft.view.interfaces.ChangeDate;
 
 import javax.swing.*;
 import java.time.LocalDate;

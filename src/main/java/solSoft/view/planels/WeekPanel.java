@@ -1,17 +1,14 @@
-package solSoft.view;
+package solSoft.view.planels;
 
 import solSoft.controller.Controller;
+import solSoft.view.Button;
+import solSoft.view.interfaces.ChangeDate;
 
 import java.awt.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class WeekPanel extends AbstractPanel implements ChangeDate {
-
-    private LocalDate actualDate;
-
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public WeekPanel() {
 
@@ -31,7 +28,7 @@ public class WeekPanel extends AbstractPanel implements ChangeDate {
             LocalDate firstDateOfWeek = date.with(DayOfWeek.MONDAY);
             LocalDate nextDay = firstDateOfWeek.plusDays(count);
             String next = nextDay.format(formatter);
-            Button button = new Button();
+            solSoft.view.Button button = new Button();
             button.setText(next);
             if (actualDateString.equals(next)) {
                 button.setBackground(Color.GRAY);

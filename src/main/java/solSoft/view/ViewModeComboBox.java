@@ -2,6 +2,7 @@ package solSoft.view;
 
 import solSoft.controller.Controller;
 import solSoft.controller.ViewMode;
+import solSoft.view.interfaces.ChangeView;
 
 import javax.swing.*;
 import java.util.List;

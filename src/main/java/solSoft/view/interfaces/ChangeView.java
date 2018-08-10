@@ -1,4 +1,4 @@
-package solSoft.view;
+package solSoft.view.interfaces;
 
 import solSoft.controller.ViewMode;
 

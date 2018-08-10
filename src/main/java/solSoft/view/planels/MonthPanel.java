@@ -1,17 +1,13 @@
-package solSoft.view;
+package solSoft.view.planels;
 
 import solSoft.controller.Controller;
+import solSoft.view.Button;
+import solSoft.view.interfaces.ChangeDate;
 
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class MonthPanel extends AbstractPanel implements ChangeDate {
-
-
-    private LocalDate actualDate;
-
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public MonthPanel() {
 
@@ -19,24 +15,18 @@ public class MonthPanel extends AbstractPanel implements ChangeDate {
     }
 
     public void createButtonsForMonth(LocalDate date) {
-
         removeAll();
         setLayout(new GridLayout(5, 7));
         int count = 0;
-
         int howLoop = 0;
         for (int i = 0; i <= 4; i++) {
             for (int j = 0; j <= 6; j++) {
-
                 String actualDateString = date.format(formatter);
-
                 howLoop++;
                 int dayOfMonth = date.lengthOfMonth();
                 if (howLoop > dayOfMonth) break;
-                Button button = new Button();
-                LocalDate firstDateOfWeek = date.withDayOfMonth(1);
-                LocalDate nextDay = firstDateOfWeek.plusDays(count);
-                String current = nextDay.format(formatter);
+                solSoft.view.Button button = new Button();
+                String current = getNextDate(date, count);
                 button.setText(current);
                 if (actualDateString.equals(current)) {
                     button.setBackground(Color.GRAY);
@@ -46,6 +36,12 @@ public class MonthPanel extends AbstractPanel implements ChangeDate {
             }
         }
         revalidate();
+    }
+
+    private String getNextDate(LocalDate date, int count) {
+        LocalDate firstDateOfWeek = date.withDayOfMonth(1);
+        LocalDate nextDay = firstDateOfWeek.plusDays(count);
+        return nextDay.format(formatter);
     }
 
 
