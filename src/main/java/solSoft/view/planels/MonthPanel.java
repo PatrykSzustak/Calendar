@@ -31,6 +31,9 @@ public class MonthPanel extends AbstractPanel implements ChangeDate {
                 if (actualDateString.equals(current)) {
                     button.setBackground(Color.GRAY);
                 }
+                if (map.containsKey(LocalDate.parse(current,formatter))){
+                    button.setBackground(Color.RED);
+                }
                 add(button);
                 count++;
             }

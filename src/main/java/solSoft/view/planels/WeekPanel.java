@@ -33,6 +33,9 @@ public class WeekPanel extends AbstractPanel implements ChangeDate {
             if (actualDateString.equals(next)) {
                 button.setBackground(Color.GRAY);
             }
+            if (map.containsKey(LocalDate.parse(next,formatter))){
+                button.setBackground(Color.RED);
+            }
             add(button);
             count++;
         }
@@ -44,4 +47,5 @@ public class WeekPanel extends AbstractPanel implements ChangeDate {
         this.actualDate = date;
         createButtonsForWeek(date);
     }
+
 }
