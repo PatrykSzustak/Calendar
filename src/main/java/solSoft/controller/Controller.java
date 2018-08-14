@@ -2,13 +2,9 @@ package solSoft.controller;
 
 import solSoft.view.interfaces.ChangeDate;
 import solSoft.view.interfaces.ChangeView;
-import solSoft.view.interfaces.NoteAdded;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Controller {
@@ -18,8 +14,7 @@ public class Controller {
 
     private List<ChangeView> viewList = new CopyOnWriteArrayList<>();
     private List<ChangeDate> dateList = new CopyOnWriteArrayList<>();
-    private List<NoteAdded> noteList = new ArrayList<>();
-    private Map<LocalDate, List<NoteAdded>> map = new HashMap<>();
+
 
     private Controller() {
 
@@ -42,15 +37,5 @@ public class Controller {
 
     public void registerDateChange(ChangeDate dateComponent) { dateList.add(dateComponent); }
 
-
-    public void registerNote(NoteAdded noteAdded) { noteList.add(noteAdded);}
-
-    public void registerNoteInMap(LocalDate localDate, List<NoteAdded> list) {map.put(localDate,list);}
-
-    public void addNote (LocalDate localDate){noteList.forEach(p->p.onCreateNote(localDate));}
-
-    public List<NoteAdded> getNoteList() { return noteList; }
-
-    public Map<LocalDate, List<NoteAdded>> getMap() { return map; }
 
 }

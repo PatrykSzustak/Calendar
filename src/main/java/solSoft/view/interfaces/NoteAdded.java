@@ -4,6 +4,6 @@ import java.time.LocalDate;
 
 public interface NoteAdded {
 
-    void onCreateNote(LocalDate localDate);
+    void onCreateNote(LocalDate localDate,String string);
 
 }

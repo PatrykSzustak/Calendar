@@ -1,9 +1,9 @@
 package solSoft.view;
 
+import solSoft.NoteFrame;
+import solSoft.NoteService;
 import solSoft.controller.Controller;
 import solSoft.view.interfaces.ChangeDate;
-import solSoft.view.interfaces.NoteAdded;
-import solSoft.view.planels.NotePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,16 +13,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-public class Button extends JButton implements ChangeDate,NoteAdded {
+public class Button extends JButton implements ChangeDate {
 
-    private LocalDate actualDate = LocalDate.now();
+    NoteFrame noteFrame;
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Button() {
         setBounds(0, 10, 100, 345);
         setBorder(BorderFactory.createLineBorder(Color.black));
+
+
         Controller.getInstance().registerDateChange(this);
-        Controller.getInstance().registerNote(this);
 
         addActionListener(e -> {
             String input = getText();
@@ -33,29 +35,23 @@ public class Button extends JButton implements ChangeDate,NoteAdded {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                String date = getText();
+                LocalDate localDate = LocalDate.parse(date, formatter);
                 if (e.getButton() == MouseEvent.BUTTON3) {
-                    String date = getText();
-                    LocalDate localDate = LocalDate.parse(date,formatter);
-                    new NoteFrame(new NotePanel(localDate));
+                    noteFrame = new NoteFrame(localDate);
+                    String note = NoteService.getInstance().getMap().get(localDate);
+                    noteFrame.getjTextArea().setText(note);
                 }
             }
         });
+
     }
 
 
     @Override
     public void onDateChange(LocalDate date) {
-        this.actualDate = date;
+        LocalDate actualDate = date;
     }
 
-    @Override
-    public void onCreateNote(LocalDate localDate) {
-        LocalDate localDate1 = LocalDate.parse(getText(),formatter);
-        if (localDate1.equals(localDate)){
-            setBackground(Color.RED);
-
-        }
-
-    }
 
 }
