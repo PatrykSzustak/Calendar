@@ -1,6 +1,5 @@
 package solSoft.view.planels;
 
-import solSoft.NoteService;
 import solSoft.controller.Controller;
 import solSoft.view.Button;
 import solSoft.view.interfaces.ChangeDate;
@@ -16,9 +15,9 @@ public class MonthPanel extends AbstractPanel implements ChangeDate {
     }
 
 
-    private String getNextDate(LocalDate date, int count) {
-        LocalDate firstDateOfWeek = date.withDayOfMonth(1);
-        LocalDate nextDay = firstDateOfWeek.plusDays(count);
+    public String getNextDate(LocalDate date, int count) {
+        LocalDate firstDayOfMonth = date.withDayOfMonth(1);
+        LocalDate nextDay = firstDayOfMonth.plusDays(count);
         return nextDay.format(formatter);
     }
 
@@ -44,22 +43,6 @@ public class MonthPanel extends AbstractPanel implements ChangeDate {
         revalidate();
     }
 
-    @Override
-    public void onDateChange(LocalDate date) {
-        this.actualDate = date;
-        for (int i = 0; i <buttons.size() ; i++) {
-            buttons.get(i).setBackground(Color.WHITE);
-            String actualDateString = date.format(formatter);
-            String current = getNextDate(actualDate, i);
-            buttons.get(i).setText(current);
-            if (actualDateString.equals(current)) {
-                buttons.get(i).setBackground(Color.GRAY);
-            }
-            if (NoteService.getInstance().getMap().containsKey(LocalDate.parse(current,formatter))) {
-                buttons.get(i).setBackground(Color.RED);
-            }
-        }
-    }
 
     @Override
     public int howDays() {

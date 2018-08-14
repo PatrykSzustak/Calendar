@@ -13,8 +13,6 @@ import java.util.List;
 
 public abstract class AbstractPanel extends JPanel implements NoteAdded {
 
-
-
     LocalDate actualDate = LocalDate.now();
     List<Button> buttons = new ArrayList<>();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -39,6 +37,23 @@ public abstract class AbstractPanel extends JPanel implements NoteAdded {
             }
         }
     }
+
+    public void onDateChange(LocalDate date) {
+        this.actualDate = date;
+        for (int i = 0; i <buttons.size() ; i++) {
+            buttons.get(i).setBackground(Color.WHITE);
+            String actualDateString = date.format(formatter);
+            String current = getNextDate(actualDate, i);
+            buttons.get(i).setText(current);
+            if (actualDateString.equals(current)) {
+                buttons.get(i).setBackground(Color.GRAY);
+            }
+            if (NoteService.getInstance().getMap().containsKey(LocalDate.parse(current,formatter))) {
+                buttons.get(i).setBackground(Color.RED);
+            }
+        }
+    }
+    public abstract String getNextDate(LocalDate localDate , int count);
 
     public abstract int howDays();
 

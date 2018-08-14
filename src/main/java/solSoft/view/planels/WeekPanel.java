@@ -17,6 +17,12 @@ public class WeekPanel extends AbstractPanel implements ChangeDate {
     }
 
 
+    public String getNextDate(LocalDate date, int count) {
+        LocalDate firstDateOfWeek = date.with(DayOfWeek.MONDAY);
+        LocalDate nextDay = firstDateOfWeek.plusDays(count);
+        return nextDay.format(formatter);
+    }
+
     public void createButtonsForWeek() {
         setLayout(new GridLayout(1, 7));
         for (int i = 0; i <= 6; i++) {
@@ -35,24 +41,6 @@ public class WeekPanel extends AbstractPanel implements ChangeDate {
         revalidate();
     }
 
-    @Override
-    public void onDateChange(LocalDate date) {
-        this.actualDate = date;
-        for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setBackground(Color.WHITE);
-            String actualDateString = date.format(formatter);
-            LocalDate firstDateOfWeek = date.with(DayOfWeek.MONDAY);
-            LocalDate nextDay = firstDateOfWeek.plusDays(i);
-            String next = nextDay.format(formatter);
-            buttons.get(i).setText(next);
-            if (buttons.get(i).getText().equals(actualDateString)) {
-                buttons.get(i).setBackground(Color.GRAY);
-            }
-            if (NoteService.getInstance().getMap().containsKey(nextDay)) {
-                buttons.get(i).setBackground(Color.RED);
-            }
-        }
-    }
 
     @Override
     public int howDays() {
