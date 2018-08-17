@@ -1,4 +1,6 @@
-package solSoft;
+package solSoft.view.components;
+
+import solSoft.service.NoteService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,25 +8,25 @@ import java.time.LocalDate;
 
 public class NoteFrame extends JFrame {
 
-    JPanel jPanel;
-    JTextArea jTextArea;
-    JButton jButton;
+    private JPanel jPanel;
+    private JTextArea jTextArea;
+    private JButton jButton;
 
-    public NoteFrame(LocalDate localDate) {
-        setSize(400,300);
+    NoteFrame(LocalDate localDate) {
+        setSize(400, 300);
         createNotePanel();
         setVisible(true);
         setLayout(null);
 
         jButton.addActionListener(e -> {
             String input = jTextArea.getText();
-            NoteService.getInstance().getMap().put(localDate,input);
-            NoteService.getInstance().noteEvent(localDate,input);
+            NoteService.getInstance().getMap().put(localDate, input);
+            NoteService.getInstance().noteEvent(localDate, input);
         });
 
     }
 
-    public void createNotePanel(){
+    private void createNotePanel() {
         jPanel = new JPanel();
         jPanel.setSize(400, 300);
         jPanel.setBackground(Color.LIGHT_GRAY);
@@ -34,27 +36,23 @@ public class NoteFrame extends JFrame {
         jPanel.setLayout(null);
         jPanel.setVisible(true);
     }
-    public void createTextArea(){
+
+    private void createTextArea() {
         jTextArea = new JTextArea();
-        jTextArea.setBounds(10,10,360,180);
+        jTextArea.setBounds(10, 10, 360, 180);
         jPanel.add(jTextArea);
     }
 
-    public void createNoteButton(){
+    private void createNoteButton() {
         jButton = new JButton();
         jButton.setBounds(130, 200, 100, 50);
         jButton.setText("Save note");
         jPanel.add(jButton);
-
-
     }
 
 
-
-    public JTextArea getjTextArea() {
+    JTextArea getJTextArea() {
         return jTextArea;
     }
-
-
 
 }

@@ -1,4 +1,4 @@
-package solSoft.view;
+package solSoft.view.components;
 
 import solSoft.view.planels.BottomPanel;
 import solSoft.view.planels.TopPanel;
@@ -6,7 +6,6 @@ import solSoft.view.planels.TopPanel;
 import javax.swing.*;
 
 public class Frame extends JFrame {
-
 
     public Frame(TopPanel topPanel, BottomPanel bottomPanel) {
         setSize(1000, 700);

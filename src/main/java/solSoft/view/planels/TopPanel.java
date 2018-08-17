@@ -1,10 +1,10 @@
 package solSoft.view.planels;
 
 import solSoft.controller.ViewMode;
-import solSoft.view.LeftButton;
-import solSoft.view.RightButton;
-import solSoft.view.TextField;
-import solSoft.view.ViewModeComboBox;
+import solSoft.view.components.LeftButton;
+import solSoft.view.components.RightButton;
+import solSoft.view.components.TextField;
+import solSoft.view.components.ViewModeComboBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +17,13 @@ public class TopPanel extends JPanel {
 
     public TopPanel() {
         setLayout(null);
-        setSize(1000,150);
+        setSize(1000, 150);
         setBackground(Color.GRAY);
         List<ViewMode> list = new ArrayList<>();
         list.addAll(asList(ViewMode.values()));
         ViewModeComboBox comboBox = new ViewModeComboBox(list);
         LeftButton leftButton = new LeftButton();
-        solSoft.view.TextField textField = new TextField();
+        TextField textField = new TextField();
         RightButton rightButton = new RightButton();
 
 

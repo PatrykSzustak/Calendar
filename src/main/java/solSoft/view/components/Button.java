@@ -1,7 +1,7 @@
-package solSoft.view;
+package solSoft.view.components;
 
-import solSoft.NoteFrame;
-import solSoft.NoteService;
+import solSoft.DataFormat;
+import solSoft.service.NoteService;
 import solSoft.controller.Controller;
 import solSoft.view.interfaces.ChangeDate;
 
@@ -10,14 +10,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 public class Button extends JButton implements ChangeDate {
 
-    NoteFrame noteFrame;
+    private NoteFrame noteFrame;
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Button() {
         setBounds(0, 10, 100, 345);
@@ -28,7 +26,7 @@ public class Button extends JButton implements ChangeDate {
 
         addActionListener(e -> {
             String input = getText();
-            LocalDate localDate = LocalDate.parse(input, formatter);
+            LocalDate localDate = LocalDate.parse(input, DataFormat.getFormatter());
             Controller.getInstance().changeDate(localDate);
         });
 
@@ -36,11 +34,11 @@ public class Button extends JButton implements ChangeDate {
             @Override
             public void mousePressed(MouseEvent e) {
                 String date = getText();
-                LocalDate localDate = LocalDate.parse(date, formatter);
+                LocalDate localDate = LocalDate.parse(date, DataFormat.getFormatter());
                 if (e.getButton() == MouseEvent.BUTTON3) {
                     noteFrame = new NoteFrame(localDate);
                     String note = NoteService.getInstance().getMap().get(localDate);
-                    noteFrame.getjTextArea().setText(note);
+                    noteFrame.getJTextArea().setText(note);
                 }
             }
         });
@@ -50,7 +48,6 @@ public class Button extends JButton implements ChangeDate {
 
     @Override
     public void onDateChange(LocalDate date) {
-        LocalDate actualDate = date;
     }
 
 

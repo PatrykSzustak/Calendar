@@ -1,4 +1,4 @@
-package solSoft.view;
+package solSoft.view.components;
 
 import solSoft.controller.Controller;
 import solSoft.controller.ViewMode;
@@ -8,9 +8,6 @@ import javax.swing.*;
 import java.util.List;
 
 public class ViewModeComboBox extends JComboBox<ViewMode> implements ChangeView {
-
-
-    private ViewMode currentView = ViewMode.WEEK;
 
 
     public ViewModeComboBox(List<ViewMode> list) {
@@ -31,6 +28,5 @@ public class ViewModeComboBox extends JComboBox<ViewMode> implements ChangeView 
 
     @Override
     public void onViewChange(ViewMode viewMode) {
-        this.currentView = viewMode;
     }
 }

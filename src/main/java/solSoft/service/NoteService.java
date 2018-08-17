@@ -1,4 +1,4 @@
-package solSoft;
+package solSoft.service;
 
 import solSoft.view.interfaces.NoteAdded;
 
@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class NoteService {
 
-    Map<LocalDate, String> map = new HashMap<>();
-    List<NoteAdded> list = new ArrayList<>();
+    private Map<LocalDate, String> map = new HashMap<>();
+    private List<NoteAdded> list = new ArrayList<>();
 
     private static NoteService instance = null;
 
@@ -26,11 +26,11 @@ public class NoteService {
         return instance;
     }
 
-    public void noteEvent(LocalDate localDate,String text){
-        list.forEach(p->p.onCreateNote(localDate,text));
+    public void noteEvent(LocalDate localDate, String text) {
+        list.forEach(p -> p.onCreateNote(localDate, text));
     }
 
-    public void addToList(NoteAdded noteAdded){
+    public void addToList(NoteAdded noteAdded) {
         list.add(noteAdded);
     }
 
@@ -40,8 +40,5 @@ public class NoteService {
 
     }
 
-    public List<NoteAdded> getList() {
-        return list;
-    }
 
 }
